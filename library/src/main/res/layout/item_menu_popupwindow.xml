@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:minHeight="50dp"
+    android:layout_height="50dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_filter_item"
+        android:text="全部期限"
+        android:textSize="15sp"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
