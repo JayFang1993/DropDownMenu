@@ -6,7 +6,14 @@
     <com.jayfang.dropdownmenu.DropDownMenu
         android:orientation="horizontal"
         android:layout_width="fill_parent"
+        android:id="@+id/menu"
         android:background="@color/ripple_material_dark"
         android:layout_height="60dp"/>
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_below="@id/menu"
+        android:id="@+id/lv_list"
+        android:layout_height="wrap_content"></ListView>
 
 </RelativeLayout>

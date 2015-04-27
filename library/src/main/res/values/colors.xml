@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="back_filter">#fafafa</color>
-
-    <color name="text_filter_title">#00cf9b</color>
-
+    <color name="text_title">#00cf9b</color>
     <color name="divider">#f1f1f1</color>
 </resources>

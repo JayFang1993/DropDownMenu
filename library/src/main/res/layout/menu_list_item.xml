@@ -6,9 +6,19 @@
     android:layout_height="50dp">
     <TextView
         android:layout_width="wrap_content"
-        android:id="@+id/tv_filter_item"
-        android:text="全部期限"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/tv_menu_item"
         android:textSize="15sp"
         android:layout_centerVertical="true"
         android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/iv_menu_select"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/tv_menu_item"
+        android:src="@drawable/ico_make"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+    
 </RelativeLayout>

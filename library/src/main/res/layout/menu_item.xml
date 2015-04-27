@@ -1,26 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
+    android:id="@+id/rl_menu_head"
     android:orientation="horizontal"
     android:background="@color/back_filter"
     android:layout_height="wrap_content">
     <TextView
-        android:id="@+id/tv_filter_left"
+        android:id="@+id/tv_menu_title"
         android:layout_width="wrap_content"
-        android:text="全部金额"
-        android:textColor="@color/text_filter_title"
+        android:textColor="@color/text_title"
         android:textSize="15sp"
         android:layout_centerInParent="true"
         android:layout_height="wrap_content" />
     <ImageView
-        android:id="@+id/iv_filter_left"
+        android:id="@+id/iv_menu_arrow"
         android:layout_width="15dp"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/tv_filter_left"
-        android:background="@drawable/arrow_down"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@+id/tv_menu_title"
+        android:src="@drawable/arrow_down"
         android:layout_centerVertical="true"
         android:layout_height="15dp" />
     <ImageView
         android:layout_width="1px"
+        android:id="@+id/iv_divider"
         android:layout_alignParentRight="true"
         android:background="@color/divider"
         android:layout_height="fill_parent" />
