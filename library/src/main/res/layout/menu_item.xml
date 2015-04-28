@@ -2,13 +2,14 @@
     android:layout_width="wrap_content"
     android:id="@+id/rl_menu_head"
     android:orientation="horizontal"
-    android:background="@color/back_filter"
+    android:background="@color/default_menu_back"
     android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_menu_title"
         android:layout_width="wrap_content"
-        android:textColor="@color/text_title"
+        android:textColor="@color/default_menu_text"
         android:textSize="15sp"
+        android:text="111"
         android:layout_centerInParent="true"
         android:layout_height="wrap_content" />
     <ImageView
