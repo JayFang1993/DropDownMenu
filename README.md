@@ -14,9 +14,6 @@ Usage
         android:layout_height="60dp"/>
 
 
-* mMenu=(DropDownMenu)findViewById(R.id.menu);
-
-
 * mMenu.setMenuCount(3);
 * mMenu.setShowCount(6);
 * mMenu.setShowCheck(true);
@@ -30,7 +27,6 @@ Usage
 * mMenu.setUpArrow(R.drawable.arrow_up);
 * mMenu.setDownArrow(R.drawable.arrow_down);
 * mMenu.setMenuItems(ArrayList<String[]>);
-
 * mMenu.setMenuSelectedListener(new OnMenuSelectedListener(){
      @Override
     public void onSelected(View listview,int RowIndex, int ColumnIndex) {
