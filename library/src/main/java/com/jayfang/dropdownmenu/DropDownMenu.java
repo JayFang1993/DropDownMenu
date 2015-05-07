@@ -243,7 +243,6 @@ public class DropDownMenu extends LinearLayout{
                 Toast.makeText(context,"If you want set Adapter by yourself,please ensure the number of adpaters equal MenuCount",Toast.LENGTH_LONG).show();
                 return;
             }
-
             int width=getWidth();
 
             for (int i=0;i<MenuCount;i++){
@@ -270,12 +269,12 @@ public class DropDownMenu extends LinearLayout{
                     public void onClick(View view) {
                         mMenuList.setAdapter(MenuAdapters.get(index));
                         if (MenuAdapters.get(index).getCount()>ShowCount){
-                            View childView = MenuAdapters.get(ColumnSelected).getView(index, null, mMenuList);
+                            View childView = MenuAdapters.get(index).getView(0, null, mMenuList);
                             childView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
                             RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,childView.getMeasuredHeight()*ShowCount);
                             mMenuList.setLayoutParams(parms);
                         }else{
-                            View childView = MenuAdapters.get(ColumnSelected).getView(index, null, mMenuList);
+                            View childView = MenuAdapters.get(index).getView(0, null, mMenuList);
                             childView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
                             RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
                             mMenuList.setLayoutParams(parms);

@@ -2,7 +2,6 @@ package com.jayfang.dropdownmenu;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +79,6 @@ public class MenuListAdapter extends BaseAdapter {
         textView.setTextColor(TextColor);
         textView.setText(strs[position]);
 
-        Log.i("fangjie","checkicon:"+CheckIcon);
         if (showCheck&&SelectIndex==position) {
             ImageView imageView = (ImageView) v.findViewById(R.id.iv_menu_select);
             imageView.setVisibility(View.VISIBLE);
