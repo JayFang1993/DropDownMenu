@@ -6,37 +6,58 @@ DropDownMenu for Android,Filter the list based on multiple condition.
 
 <img src="screenshot.gif" width="270" height="450"/>
 
+ To get this project into your build
+----------
+
+Step 1. Add the specific repository to your build file:
+```
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+```
+Step 2. Add the dependency in your build file (do not forget to specify the correct qualifier, usually 'aar'):
+
+```
+dependencies {
+    compile 'com.github.JayFang1993:DropDownMenu:fe8bd100a0'
+}
+```
+That's it!
+Provided by：Android Arsenal
 
 Usage
 ----
-    <com.jayfang.dropdownmenu.DropDownMenu
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:id="@+id/menu"
-        android:background="@color/ripple_material_dark"
-        android:layout_height="60dp"/>
+```
+<com.jayfang.dropdownmenu.DropDownMenu
+     android:orientation="horizontal"
+     android:layout_width="fill_parent"
+     android:id="@+id/menu"
+     android:background="@color/ripple_material_dark"
+     android:layout_height="60dp"/>
 
 
-* mMenu=(DropDownMenu)findViewById(R.id.menu);
-* mMenu.setMenuItems(ArrayList<String[]>);
-* mMenu.setMenuCount(3);
-* mMenu.setShowCount(6);
-* mMenu.setShowCheck(true);
-* mMenu.setMenuTitleTextSize(16);
-* mMenu.setMenuTitleTextColor(Color.BLACK);
-* mMenu.setMenuListTextSize(16);
-* mMenu.setMenuListTextColor(Color.BLACK);
-* mMenu.setMenuBackColor(Color.GRAY);
-* mMenu.setMenuPressedBackColor(Color.CYAN);
-* mMenu.setCheckIcon(R.drawable.ico_make);
-* mMenu.setUpArrow(R.drawable.arrow_up);
-* mMenu.setDownArrow(R.drawable.arrow_down);
-* mMenu.setMenuSelectedListener(new OnMenuSelectedListener(){
+mMenu=(DropDownMenu)findViewById(R.id.menu);
+mMenu.setMenuItems(ArrayList<String[]>);
+mMenu.setMenuCount(3);
+mMenu.setShowCount(6);
+mMenu.setShowCheck(true);
+mMenu.setMenuTitleTextSize(16);
+mMenu.setMenuTitleTextColor(Color.BLACK);
+mMenu.setMenuListTextSize(16);
+mMenu.setMenuListTextColor(Color.BLACK);
+mMenu.setMenuBackColor(Color.GRAY);
+mMenu.setMenuPressedBackColor(Color.CYAN);
+mMenu.setCheckIcon(R.drawable.ico_make);
+mMenu.setUpArrow(R.drawable.arrow_up);
+mMenu.setDownArrow(R.drawable.arrow_down);
+mMenu.setMenuSelectedListener(new OnMenuSelectedListener(){
      @Override
     public void onSelected(View listview,int RowIndex, int ColumnIndex) {
 
    }});
-
+```
 
         
 Contact
