@@ -31,10 +31,13 @@ public class MainActivity extends ActionBarActivity {
     final String[] arr2=new String[]{"性别","男","女"};
     final String[] arr3=new String[]{"全部年龄","10","20","30","40","50","60","70"};
 
+    final String[] strings=new String[]{"选择城市","选择性别","选择年龄"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mMenu=(DropDownMenu)findViewById(R.id.menu);
 
         mMenu.setMenuCount(3);
@@ -51,6 +54,8 @@ public class MainActivity extends ActionBarActivity {
 
         mMenu.setUpArrow(R.drawable.arrow_up);
         mMenu.setDownArrow(R.drawable.arrow_down);
+
+        mMenu.setDefaultMenuTitle(strings);
 
 
         mMenu.setShowDivider(false);

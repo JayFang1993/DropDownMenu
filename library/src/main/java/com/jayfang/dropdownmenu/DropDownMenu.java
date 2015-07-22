@@ -95,6 +95,10 @@ public class DropDownMenu extends LinearLayout{
 
     private boolean drawable=false;
 
+    private String[] defaultMenuTitle;
+
+    private boolean isDebug=true;
+
     public DropDownMenu(Context context) {
         super(context);
         init(context);
@@ -157,6 +161,14 @@ public class DropDownMenu extends LinearLayout{
 
     public void setMenuPressedTitleTextColor(int menuPressedTitleTextColor) {
         MenuPressedTitleTextColor = menuPressedTitleTextColor;
+    }
+
+    public void setDefaultMenuTitle(String[] defaultMenuTitle) {
+        this.defaultMenuTitle = defaultMenuTitle;
+    }
+
+    public void setIsDebug(boolean isDebug) {
+        this.isDebug = isDebug;
     }
 
     // 设置 show 数量
@@ -248,7 +260,7 @@ public class DropDownMenu extends LinearLayout{
                         mTvMenuTitles.get(ColumnSelected).setText(MenuItems.get(ColumnSelected)[RowSelected]);
                         mIvMenuArrow.get(ColumnSelected).setImageResource(DownArrow);
                         MenuAdapters.get(ColumnSelected).setSelectIndex(RowSelected);
-                        if (MenuSelectedListener == null)
+                        if (MenuSelectedListener == null && isDebug)
                             Toast.makeText(context, "MenuSelectedListener is  null", Toast.LENGTH_LONG).show();
                         else
                             MenuSelectedListener.onSelected(view, RowSelected, ColumnSelected);
@@ -266,7 +278,7 @@ public class DropDownMenu extends LinearLayout{
                     }
                 });
 
-                if (MenuItems.size() != MenuCount) {
+                if (MenuItems.size() != MenuCount&&isDebug) {
                     Toast.makeText(context, "Menu item is not setted or incorrect", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -279,7 +291,7 @@ public class DropDownMenu extends LinearLayout{
                         MenuAdapters.add(adapter);
 
                     }
-                } else if (MenuAdapters.size() != MenuCount) {
+                } else if (MenuAdapters.size() != MenuCount &&isDebug) {
                     Toast.makeText(context, "If you want set Adapter by yourself,please ensure the number of adpaters equal MenuCount", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -292,7 +304,11 @@ public class DropDownMenu extends LinearLayout{
                     TextView tv = (TextView) v.findViewById(R.id.tv_menu_title);
                     tv.setTextColor(MenuTitleTextColor);
                     tv.setTextSize(MenuTitleTextSize);
-                    tv.setText(MenuItems.get(i)[0]);
+                    if (defaultMenuTitle.length==0){
+                        tv.setText(MenuItems.get(i)[0]);
+                    }else{
+                        tv.setText(defaultMenuTitle[i]);
+                    }
                     this.addView(v, i);
                     mTvMenuTitles.add(tv);
 
