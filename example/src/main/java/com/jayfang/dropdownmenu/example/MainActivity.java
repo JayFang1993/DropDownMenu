@@ -95,6 +95,7 @@ public class MainActivity extends ActionBarActivity {
 
             }
         }, 1000);
+        mMenu.setIsDebug(false);
 
         mList=(ListView)findViewById(R.id.lv_list);
         data=getData();
