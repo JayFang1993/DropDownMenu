@@ -17,7 +17,6 @@
         android:layout_width="15dp"
         android:layout_marginLeft="3dp"
         android:layout_toRightOf="@+id/tv_menu_title"
-        android:src="@drawable/arrow_down"
         android:layout_centerVertical="true"
         android:layout_height="15dp" />
     <ImageView

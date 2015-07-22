@@ -65,6 +65,8 @@ public class DropDownMenu extends LinearLayout{
     private int MenuTitleTextColor;
     //Menu的字体大小
     private int MenuTitleTextSize;
+    //Menu的按下的字体颜色
+    private int MenuPressedTitleTextColor;
     //Menu的按下背景
     private int MenuPressedBackColor;
     //Menu的背景
@@ -75,6 +77,14 @@ public class DropDownMenu extends LinearLayout{
     private int MenuListTextColor;
     //是否显示选中的对勾
     private boolean showCheck;
+    //是否现实列表的分割线
+    private boolean showDivider;
+    //列表的背景
+    private int MenuListBackColor;
+    //列表的按下效果
+    private int MenuListSelectorRes;
+    //箭头距离
+    private int ArrowMarginTitle;
 
     //对勾的图片资源
     private int CheckIcon;
@@ -100,9 +110,14 @@ public class DropDownMenu extends LinearLayout{
         ShowCount=5;
         MenuTitleTextColor=getResources().getColor(R.color.default_menu_text);
         MenuPressedBackColor=getResources().getColor(R.color.default_menu_press_back);
+        MenuPressedTitleTextColor=getResources().getColor(R.color.default_menu_press_text);
         MenuBackColor=getResources().getColor(R.color.default_menu_back);
+        MenuListBackColor=getResources().getColor(R.color.white);
+        MenuListSelectorRes=R.color.white;
         MenuTitleTextSize=18;
+        ArrowMarginTitle=10;
         showCheck=true;
+        showDivider=true;
         CheckIcon=R.drawable.ico_make;
         UpArrow=R.drawable.arrow_up;
         DownArrow=R.drawable.arrow_down;
@@ -117,6 +132,27 @@ public class DropDownMenu extends LinearLayout{
     // 设置 Menu的数量
     public void setMenuCount(int menuCount) {
         MenuCount = menuCount;
+    }
+
+
+    public void setShowDivider(boolean showDivider) {
+        this.showDivider = showDivider;
+    }
+
+    public void setMenuListBackColor(int menuListBackColor) {
+        MenuListBackColor = menuListBackColor;
+    }
+
+    public void setMenuListSelectorRes(int menuListSelectorRes) {
+        MenuListSelectorRes = menuListSelectorRes;
+    }
+
+    public void setArrowMarginTitle(int arrowMarginTitle) {
+        ArrowMarginTitle = arrowMarginTitle;
+    }
+
+    public void setMenuPressedTitleTextColor(int menuPressedTitleTextColor) {
+        MenuPressedTitleTextColor = menuPressedTitleTextColor;
     }
 
     // 设置 show 数量
@@ -208,7 +244,6 @@ public class DropDownMenu extends LinearLayout{
                     mTvMenuTitles.get(ColumnSelected).setText(MenuItems.get(ColumnSelected)[RowSelected]);
                     mIvMenuArrow.get(ColumnSelected).setImageResource(DownArrow);
                     MenuAdapters.get(ColumnSelected).setSelectIndex(RowSelected);
-
                     if(MenuSelectedListener==null)
                         Toast.makeText(context,"MenuSelectedListener is  null",Toast.LENGTH_LONG).show();
                     else
@@ -222,6 +257,7 @@ public class DropDownMenu extends LinearLayout{
                     for (int i=0;i<MenuCount;i++){
                         mIvMenuArrow.get(i).setImageResource(DownArrow);
                         mRlMenuBacks.get(i).setBackgroundColor(MenuBackColor);
+                        mTvMenuTitles.get(i).setTextColor(MenuTitleTextColor);
                     }
                 }
             });
@@ -253,15 +289,20 @@ public class DropDownMenu extends LinearLayout{
                 tv.setTextColor(MenuTitleTextColor);
                 tv.setTextSize(MenuTitleTextSize);
                 tv.setText(MenuItems.get(i)[0]);
-                this.addView(v,i);
+                this.addView(v, i);
                 mTvMenuTitles.add(tv);
 
-                RelativeLayout rl=(RelativeLayout)v.findViewById(R.id.rl_menu_head);
+                RelativeLayout rl=(RelativeLayout) v.findViewById(R.id.rl_menu_head);
                 rl.setBackgroundColor(MenuBackColor);
                 mRlMenuBacks.add(rl);
 
-                ImageView iv=(ImageView)v.findViewById(R.id.iv_menu_arrow);
+                ImageView iv=(ImageView) v.findViewById(R.id.iv_menu_arrow);
                 mIvMenuArrow.add(iv);
+                mIvMenuArrow.get(i).setImageResource(DownArrow);
+
+                RelativeLayout.LayoutParams params=(RelativeLayout.LayoutParams)iv.getLayoutParams();
+                params.leftMargin=ArrowMarginTitle;
+                iv.setLayoutParams(params);
 
                 final int index=i;
                 v.setOnClickListener(new OnClickListener() {
@@ -279,9 +320,14 @@ public class DropDownMenu extends LinearLayout{
                             RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
                             mMenuList.setLayoutParams(parms);
                         }
+                        if(!showDivider)
+                            mMenuList.setDivider(null);
+                        mMenuList.setBackgroundColor(MenuListBackColor);
+                        mMenuList.setSelector(MenuListSelectorRes);
                         ColumnSelected=index;
+                        mTvMenuTitles.get(index).setTextColor(MenuPressedTitleTextColor);
                         mRlMenuBacks.get(index).setBackgroundColor(MenuPressedBackColor);
-                        mIvMenuArrow.get(ColumnSelected).setImageResource(UpArrow);
+                        mIvMenuArrow.get(index).setImageResource(UpArrow);
                         mPopupWindow.showAsDropDown(v);
                     }
                 });

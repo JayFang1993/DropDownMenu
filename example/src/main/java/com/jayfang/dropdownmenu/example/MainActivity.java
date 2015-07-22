@@ -40,11 +40,11 @@ public class MainActivity extends ActionBarActivity {
         mMenu.setShowCount(6);
         mMenu.setShowCheck(true);
         mMenu.setMenuTitleTextSize(16);
-        mMenu.setMenuTitleTextColor(Color.BLACK);
+        mMenu.setMenuTitleTextColor(Color.WHITE);
         mMenu.setMenuListTextSize(16);
         mMenu.setMenuListTextColor(Color.BLACK);
-//        mMenu.setMenuBackColor(Color.GRAY);
-//        mMenu.setMenuPressedBackColor(Color.CYAN);
+        mMenu.setMenuBackColor(Color.GRAY);
+        mMenu.setMenuPressedBackColor(Color.WHITE);
 
         mMenu.setCheckIcon(R.drawable.ico_make);
 
@@ -55,18 +55,25 @@ public class MainActivity extends ActionBarActivity {
         items.add(arr1);
         items.add(arr2);
         items.add(arr3);
-
         mMenu.setMenuItems(items);
-        mMenu.setMenuSelectedListener(new OnMenuSelectedListener(){
+
+
+        mMenu.setShowDivider(false);
+        mMenu.setMenuListBackColor(getResources().getColor(R.color.white));
+        mMenu.setMenuListSelectorRes(R.color.white);
+        mMenu.setArrowMarginTitle(20);
+        mMenu.setMenuPressedTitleTextColor(Color.BLACK);
+
+        mMenu.setMenuSelectedListener(new OnMenuSelectedListener() {
             @Override
-            public void onSelected(View listview,int RowIndex, int ColumnIndex) {
-                Log.i("MainActivity","select "+ColumnIndex +" column and " +RowIndex+" row");
-                if (ColumnIndex==0){
-                    city_index=RowIndex;
-                }else if (ColumnIndex==1){
-                    sex_index=RowIndex;
-                }else {
-                    age_index=RowIndex;
+            public void onSelected(View listview, int RowIndex, int ColumnIndex) {
+                Log.i("MainActivity", "select " + ColumnIndex + " column and " + RowIndex + " row");
+                if (ColumnIndex == 0) {
+                    city_index = RowIndex;
+                } else if (ColumnIndex == 1) {
+                    sex_index = RowIndex;
+                } else {
+                    age_index = RowIndex;
                 }
                 //过滤筛选
                 setFilter();
@@ -75,7 +82,9 @@ public class MainActivity extends ActionBarActivity {
 
         mList=(ListView)findViewById(R.id.lv_list);
         data=getData();
-        mList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,data));
+        mList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, data));
+
+
     }
 
     private void setFilter(){
