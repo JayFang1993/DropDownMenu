@@ -2,6 +2,7 @@ package com.jayfang.dropdownmenu.example;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -73,22 +74,22 @@ public class MainActivity extends ActionBarActivity {
                 setFilter();
             }
         });
-        List<String[]> items = new ArrayList<>();
-        items.add(arr1);
-        items.add(arr2);
-        items.add(arr3);
-        mMenu.setMenuItems(items);
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                List<String[]> items = new ArrayList<>();
-//                items.add(arr1);
-//                items.add(arr2);
-//                items.add(arr3);
-//                mMenu.setMenuItems(items);
-//
-//            }
-//        }, 1000);
+//        List<String[]> items = new ArrayList<>();
+//        items.add(arr1);
+//        items.add(arr2);
+//        items.add(arr3);
+//        mMenu.setMenuItems(items);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                List<String[]> items = new ArrayList<>();
+                items.add(arr1);
+                items.add(arr2);
+                items.add(arr3);
+                mMenu.setMenuItems(items);
+
+            }
+        }, 1000);
 
         mList=(ListView)findViewById(R.id.lv_list);
         data=getData();

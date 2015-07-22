@@ -93,6 +93,8 @@ public class DropDownMenu extends LinearLayout{
     //向下的箭头图片资源
     private int DownArrow;
 
+    private boolean drawable=false;
+
     public DropDownMenu(Context context) {
         super(context);
         init(context);
@@ -127,6 +129,7 @@ public class DropDownMenu extends LinearLayout{
     // 设置 Menu的item
     public void setMenuItems(List<String[]> menuItems) {
         MenuItems = menuItems;
+        drawable=true;
         invalidate();
     }
 
@@ -220,117 +223,120 @@ public class DropDownMenu extends LinearLayout{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-            View popupView =LayoutInflater.from(context).inflate(R.layout.popupwindow_menu, null);
-            mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
-            mPopupWindow.setTouchable(true);
-            mPopupWindow.setOutsideTouchable(true);
-            mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-            mMenuList=(ListView)popupView.findViewById(R.id.lv_menu);
-            mRlShadow=(RelativeLayout)popupView.findViewById(R.id.rl_menu_shadow);
+            if (mPopupWindow==null||drawable) {
+                View popupView = LayoutInflater.from(context).inflate(R.layout.popupwindow_menu, null);
+                mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+                mPopupWindow.setTouchable(true);
+                mPopupWindow.setOutsideTouchable(true);
+                mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+                mMenuList = (ListView) popupView.findViewById(R.id.lv_menu);
+                mRlShadow = (RelativeLayout) popupView.findViewById(R.id.rl_menu_shadow);
 
-            mRlShadow.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mPopupWindow.dismiss();
-                }
-            });
-
-            mMenuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    mPopupWindow.dismiss();
-                    RowSelected=position;
-
-                    mTvMenuTitles.get(ColumnSelected).setText(MenuItems.get(ColumnSelected)[RowSelected]);
-                    mIvMenuArrow.get(ColumnSelected).setImageResource(DownArrow);
-                    MenuAdapters.get(ColumnSelected).setSelectIndex(RowSelected);
-                    if(MenuSelectedListener==null)
-                        Toast.makeText(context,"MenuSelectedListener is  null",Toast.LENGTH_LONG).show();
-                    else
-                        MenuSelectedListener.onSelected(view,RowSelected, ColumnSelected);
-                }
-            });
-
-            mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    for (int i=0;i<MenuCount;i++){
-                        mIvMenuArrow.get(i).setImageResource(DownArrow);
-                        mRlMenuBacks.get(i).setBackgroundColor(MenuBackColor);
-                        mTvMenuTitles.get(i).setTextColor(MenuTitleTextColor);
-                    }
-                }
-            });
-
-            if(MenuItems.size()!=MenuCount){
-                Toast.makeText(context,"Menu item is not setted or incorrect",Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            if(MenuAdapters.size()==0){
-                for (int i=0;i<MenuCount;i++){
-                    MenuListAdapter adapter=new MenuListAdapter(context, MenuItems.get(i));
-                    adapter.setShowCheck(showCheck);
-                    adapter.setCheckIcon(CheckIcon);
-                    MenuAdapters.add(adapter);
-
-                }
-            }else if(MenuAdapters.size()!=MenuCount){
-                Toast.makeText(context,"If you want set Adapter by yourself,please ensure the number of adpaters equal MenuCount",Toast.LENGTH_LONG).show();
-                return;
-            }
-            int width=getWidth();
-
-            for (int i=0;i<MenuCount;i++){
-                final RelativeLayout v =(RelativeLayout)LayoutInflater.from(context).inflate(R.layout.menu_item,null,false);
-                RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(width/MenuCount, LayoutParams.WRAP_CONTENT);
-                v.setLayoutParams(parms);
-                TextView tv=(TextView)v.findViewById(R.id.tv_menu_title);
-                tv.setTextColor(MenuTitleTextColor);
-                tv.setTextSize(MenuTitleTextSize);
-                tv.setText(MenuItems.get(i)[0]);
-                this.addView(v, i);
-                mTvMenuTitles.add(tv);
-
-                RelativeLayout rl=(RelativeLayout) v.findViewById(R.id.rl_menu_head);
-                rl.setBackgroundColor(MenuBackColor);
-                mRlMenuBacks.add(rl);
-
-                ImageView iv=(ImageView) v.findViewById(R.id.iv_menu_arrow);
-                mIvMenuArrow.add(iv);
-                mIvMenuArrow.get(i).setImageResource(DownArrow);
-
-                RelativeLayout.LayoutParams params=(RelativeLayout.LayoutParams)iv.getLayoutParams();
-                params.leftMargin=ArrowMarginTitle;
-                iv.setLayoutParams(params);
-
-                final int index=i;
-                v.setOnClickListener(new OnClickListener() {
+                mRlShadow.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        mMenuList.setAdapter(MenuAdapters.get(index));
-                        if (MenuAdapters.get(index).getCount()>ShowCount){
-                            View childView = MenuAdapters.get(index).getView(0, null, mMenuList);
-                            childView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-                            RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,childView.getMeasuredHeight()*ShowCount);
-                            mMenuList.setLayoutParams(parms);
-                        }else{
-                            View childView = MenuAdapters.get(index).getView(0, null, mMenuList);
-                            childView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-                            RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-                            mMenuList.setLayoutParams(parms);
-                        }
-                        if(!showDivider)
-                            mMenuList.setDivider(null);
-                        mMenuList.setBackgroundColor(MenuListBackColor);
-                        mMenuList.setSelector(MenuListSelectorRes);
-                        ColumnSelected=index;
-                        mTvMenuTitles.get(index).setTextColor(MenuPressedTitleTextColor);
-                        mRlMenuBacks.get(index).setBackgroundColor(MenuPressedBackColor);
-                        mIvMenuArrow.get(index).setImageResource(UpArrow);
-                        mPopupWindow.showAsDropDown(v);
+                    public void onClick(View v) {
+                        mPopupWindow.dismiss();
                     }
                 });
+
+                mMenuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        mPopupWindow.dismiss();
+                        RowSelected = position;
+
+                        mTvMenuTitles.get(ColumnSelected).setText(MenuItems.get(ColumnSelected)[RowSelected]);
+                        mIvMenuArrow.get(ColumnSelected).setImageResource(DownArrow);
+                        MenuAdapters.get(ColumnSelected).setSelectIndex(RowSelected);
+                        if (MenuSelectedListener == null)
+                            Toast.makeText(context, "MenuSelectedListener is  null", Toast.LENGTH_LONG).show();
+                        else
+                            MenuSelectedListener.onSelected(view, RowSelected, ColumnSelected);
+                    }
+                });
+
+                mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        for (int i = 0; i < MenuCount; i++) {
+                            mIvMenuArrow.get(i).setImageResource(DownArrow);
+                            mRlMenuBacks.get(i).setBackgroundColor(MenuBackColor);
+                            mTvMenuTitles.get(i).setTextColor(MenuTitleTextColor);
+                        }
+                    }
+                });
+
+                if (MenuItems.size() != MenuCount) {
+                    Toast.makeText(context, "Menu item is not setted or incorrect", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (MenuAdapters.size() == 0) {
+                    for (int i = 0; i < MenuCount; i++) {
+                        MenuListAdapter adapter = new MenuListAdapter(context, MenuItems.get(i));
+                        adapter.setShowCheck(showCheck);
+                        adapter.setCheckIcon(CheckIcon);
+                        MenuAdapters.add(adapter);
+
+                    }
+                } else if (MenuAdapters.size() != MenuCount) {
+                    Toast.makeText(context, "If you want set Adapter by yourself,please ensure the number of adpaters equal MenuCount", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                int width = getWidth();
+
+                for (int i = 0; i < MenuCount; i++) {
+                    final RelativeLayout v = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.menu_item, null, false);
+                    RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(width / MenuCount, LayoutParams.WRAP_CONTENT);
+                    v.setLayoutParams(parms);
+                    TextView tv = (TextView) v.findViewById(R.id.tv_menu_title);
+                    tv.setTextColor(MenuTitleTextColor);
+                    tv.setTextSize(MenuTitleTextSize);
+                    tv.setText(MenuItems.get(i)[0]);
+                    this.addView(v, i);
+                    mTvMenuTitles.add(tv);
+
+                    RelativeLayout rl = (RelativeLayout) v.findViewById(R.id.rl_menu_head);
+                    rl.setBackgroundColor(MenuBackColor);
+                    mRlMenuBacks.add(rl);
+
+                    ImageView iv = (ImageView) v.findViewById(R.id.iv_menu_arrow);
+                    mIvMenuArrow.add(iv);
+                    mIvMenuArrow.get(i).setImageResource(DownArrow);
+
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) iv.getLayoutParams();
+                    params.leftMargin = ArrowMarginTitle;
+                    iv.setLayoutParams(params);
+
+                    final int index = i;
+                    v.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mMenuList.setAdapter(MenuAdapters.get(index));
+                            if (MenuAdapters.get(index).getCount() > ShowCount) {
+                                View childView = MenuAdapters.get(index).getView(0, null, mMenuList);
+                                childView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+                                RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, childView.getMeasuredHeight() * ShowCount);
+                                mMenuList.setLayoutParams(parms);
+                            } else {
+                                View childView = MenuAdapters.get(index).getView(0, null, mMenuList);
+                                childView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+                                RelativeLayout.LayoutParams parms = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                                mMenuList.setLayoutParams(parms);
+                            }
+                            if (!showDivider)
+                                mMenuList.setDivider(null);
+                            mMenuList.setBackgroundColor(MenuListBackColor);
+                            mMenuList.setSelector(MenuListSelectorRes);
+                            ColumnSelected = index;
+                            mTvMenuTitles.get(index).setTextColor(MenuPressedTitleTextColor);
+                            mRlMenuBacks.get(index).setBackgroundColor(MenuPressedBackColor);
+                            mIvMenuArrow.get(index).setImageResource(UpArrow);
+                            mPopupWindow.showAsDropDown(v);
+                        }
+                    });
+                }
+                drawable=false;
             }
     }
 
