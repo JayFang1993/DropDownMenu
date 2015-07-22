@@ -51,12 +51,6 @@ public class MainActivity extends ActionBarActivity {
         mMenu.setUpArrow(R.drawable.arrow_up);
         mMenu.setDownArrow(R.drawable.arrow_down);
 
-        List<String[]> items=new ArrayList<>();
-        items.add(arr1);
-        items.add(arr2);
-        items.add(arr3);
-        mMenu.setMenuItems(items);
-
 
         mMenu.setShowDivider(false);
         mMenu.setMenuListBackColor(getResources().getColor(R.color.white));
@@ -79,6 +73,22 @@ public class MainActivity extends ActionBarActivity {
                 setFilter();
             }
         });
+        List<String[]> items = new ArrayList<>();
+        items.add(arr1);
+        items.add(arr2);
+        items.add(arr3);
+        mMenu.setMenuItems(items);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                List<String[]> items = new ArrayList<>();
+//                items.add(arr1);
+//                items.add(arr2);
+//                items.add(arr3);
+//                mMenu.setMenuItems(items);
+//
+//            }
+//        }, 1000);
 
         mList=(ListView)findViewById(R.id.lv_list);
         data=getData();

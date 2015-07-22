@@ -127,6 +127,7 @@ public class DropDownMenu extends LinearLayout{
     // 设置 Menu的item
     public void setMenuItems(List<String[]> menuItems) {
         MenuItems = menuItems;
+        invalidate();
     }
 
     // 设置 Menu的数量
@@ -219,7 +220,6 @@ public class DropDownMenu extends LinearLayout{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(mPopupWindow==null){
             View popupView =LayoutInflater.from(context).inflate(R.layout.popupwindow_menu, null);
             mPopupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
             mPopupWindow.setTouchable(true);
@@ -332,7 +332,6 @@ public class DropDownMenu extends LinearLayout{
                     }
                 });
             }
-        }
     }
 
 
