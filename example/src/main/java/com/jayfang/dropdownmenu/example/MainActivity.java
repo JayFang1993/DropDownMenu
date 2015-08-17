@@ -2,7 +2,6 @@ package com.jayfang.dropdownmenu.example;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -40,29 +39,29 @@ public class MainActivity extends ActionBarActivity {
 
         mMenu=(DropDownMenu)findViewById(R.id.menu);
 
-        mMenu.setMenuCount(3);
-        mMenu.setShowCount(6);
+        mMenu.setmMenuCount(3);
+        mMenu.setmShowCount(6);
         mMenu.setShowCheck(true);
-        mMenu.setMenuTitleTextSize(16);
-        mMenu.setMenuTitleTextColor(Color.WHITE);
-        mMenu.setMenuListTextSize(16);
-        mMenu.setMenuListTextColor(Color.BLACK);
-        mMenu.setMenuBackColor(Color.GRAY);
-        mMenu.setMenuPressedBackColor(Color.WHITE);
+        mMenu.setmMenuTitleTextSize(16);
+        mMenu.setmMenuTitleTextColor(Color.parseColor("#777777"));
+        mMenu.setmMenuListTextSize(16);
+        mMenu.setmMenuListTextColor(Color.BLACK);
+        mMenu.setmMenuBackColor(Color.parseColor("#eeeeee"));
+        mMenu.setmMenuPressedBackColor(Color.WHITE);
+        mMenu.setmMenuPressedTitleTextColor(Color.BLACK);
 
-        mMenu.setCheckIcon(R.drawable.ico_make);
+        mMenu.setmCheckIcon(R.drawable.ico_make);
 
-        mMenu.setUpArrow(R.drawable.arrow_up);
-        mMenu.setDownArrow(R.drawable.arrow_down);
+        mMenu.setmUpArrow(R.drawable.arrow_up);
+        mMenu.setmDownArrow(R.drawable.arrow_down);
 
         mMenu.setDefaultMenuTitle(strings);
 
 
         mMenu.setShowDivider(false);
-        mMenu.setMenuListBackColor(getResources().getColor(R.color.white));
-        mMenu.setMenuListSelectorRes(R.color.white);
-        mMenu.setArrowMarginTitle(20);
-        mMenu.setMenuPressedTitleTextColor(Color.BLACK);
+        mMenu.setmMenuListBackColor(getResources().getColor(R.color.white));
+        mMenu.setmMenuListSelectorRes(R.color.white);
+        mMenu.setmArrowMarginTitle(20);
 
         mMenu.setMenuSelectedListener(new OnMenuSelectedListener() {
             @Override
@@ -79,28 +78,29 @@ public class MainActivity extends ActionBarActivity {
                 setFilter();
             }
         });
-//        List<String[]> items = new ArrayList<>();
-//        items.add(arr1);
-//        items.add(arr2);
-//        items.add(arr3);
-//        mMenu.setMenuItems(items);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                List<String[]> items = new ArrayList<>();
-                items.add(arr1);
-                items.add(arr2);
-                items.add(arr3);
-                mMenu.setMenuItems(items);
+        List<String[]> items = new ArrayList<>();
+        items.add(arr1);
+        items.add(arr2);
+        items.add(arr3);
+        mMenu.setmMenuItems(items);
 
-            }
-        }, 1000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                List<String[]> items = new ArrayList<>();
+//                items.add(arr1);
+//                items.add(arr2);
+//                items.add(arr3);
+//                mMenu.setmMenuItems(items);
+//
+//            }
+//        }, 1000);
+
         mMenu.setIsDebug(false);
 
         mList=(ListView)findViewById(R.id.lv_list);
         data=getData();
         mList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, data));
-
 
     }
 
