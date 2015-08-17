@@ -22,7 +22,7 @@ Step 2. Add the dependency in your build file (do not forget to specify the corr
 
 ```
 dependencies {
-    compile 'com.github.JayFang1993:DropDownMenu:3e8620dc99'
+    compile 'com.github.JayFang1993:DropDownMenu:96d390f9c4'
 }
 ```
 That's it!
@@ -65,7 +65,11 @@ Usage
 
 Update 
 ----
-
+### 2015.8.17
+```
+        1.优化了onDraw里反复new对象的问题；
+        2.修改部分编码规范。
+```
 ### 2015.7.22
 ```
         mMenu.setShowDivider(false);  //是否显示展开list的分割线
@@ -78,8 +82,10 @@ Update
         
 Contact
 ----------
-* Blog：[http://fangjie.info/](http://fangjie.info/)
+* Blog:[http://fangjie.info/](http://fangjie.info/)
 * Email:JayFang1993@gmail.com
+* Twitter:@[jayfang1993](https://twitter.com/jayfang1993)
+* Weibo:@[方杰_Jay](http://weibo.com/ncuitstudent)
 
 
 License
