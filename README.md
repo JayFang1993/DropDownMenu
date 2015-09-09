@@ -4,7 +4,7 @@
 
 DropDownMenu for Android,Filter the list based on multiple condition.
 
-<img src="screenshot.gif" width="270" height="450"/>
+<img src="https://github.com/JayFang1993/DropDownMenu/blob/master/screenshot.gif" width="270" height="450"/>
 
  To get this project into your build
 ----------
