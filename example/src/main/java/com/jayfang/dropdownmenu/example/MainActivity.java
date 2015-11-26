@@ -58,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
         mMenu.setDefaultMenuTitle(strings);
 
 
-        mMenu.setShowDivider(false);
+        mMenu.setShowDivider(true);
         mMenu.setmMenuListBackColor(getResources().getColor(R.color.white));
         mMenu.setmMenuListSelectorRes(R.color.white);
         mMenu.setmArrowMarginTitle(20);
@@ -75,6 +75,15 @@ public class MainActivity extends ActionBarActivity {
                     age_index = RowIndex;
                 }
                 //过滤筛选
+                setFilter();
+            }
+
+            @Override
+            public void onReSelectingTheSameRow() {
+                city_index = 0;
+                sex_index = 0;
+                age_index = 0;
+
                 setFilter();
             }
         });
