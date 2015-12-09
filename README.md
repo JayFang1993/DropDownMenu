@@ -87,6 +87,9 @@ Contact
 * Twitter:@[jayfang1993](https://twitter.com/jayfang1993)
 * Weibo:@[方杰_Jay](http://weibo.com/ncuitstudent)
 
+Remark
+---------
+if you use this library，please tell me your App，thanks！
 
 License
 ----------
