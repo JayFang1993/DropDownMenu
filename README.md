@@ -2,7 +2,7 @@
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-DropDownMenu-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1753)
 
-DropDownMenu for Android,Filter the list based on multiple condition.
+DropDownMenu for Android,filter the list based on multiple condition.
 
 <img src="https://github.com/JayFang1993/DropDownMenu/blob/master/screenshot.gif" width="270" height="450"/>
 
@@ -22,7 +22,7 @@ Step 2. Add the dependency in your build file (do not forget to specify the corr
 
 ```
 dependencies {
-    compile 'com.github.JayFang1993:DropDownMenu:96d390f9c4'
+    compile 'com.github.JayFang1993:DropDownMenu:v0.9'
 }
 ```
 That's it!
