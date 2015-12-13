@@ -12,5 +12,6 @@ import android.view.View;
 public interface OnMenuSelectedListener {
 
     public void onSelected(View listview,int RowIndex,int ColumnIndex);
+    public void onReSelectingTheSameRow();
 
 }

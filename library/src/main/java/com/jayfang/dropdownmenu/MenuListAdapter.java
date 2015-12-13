@@ -22,7 +22,7 @@ public class MenuListAdapter extends BaseAdapter {
     private Context context;
     private String[] strs;
 
-    private int SelectIndex;
+    private int SelectIndex=-1;
     private int TextSize;
     private int TextColor;
     private boolean showCheck;
@@ -74,13 +74,17 @@ public class MenuListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v= LayoutInflater.from(context).inflate(R.layout.menu_list_item,parent,false);
+        ImageView imageView = (ImageView) v.findViewById(R.id.iv_menu_select);
         TextView textView=(TextView)v.findViewById(R.id.tv_menu_item);
         textView.setTextSize(TextSize);
         textView.setTextColor(TextColor);
         textView.setText(strs[position]);
 
+        if (SelectIndex == -1){
+            imageView.setVisibility(View.GONE);
+        }
+
         if (showCheck&&SelectIndex==position) {
-            ImageView imageView = (ImageView) v.findViewById(R.id.iv_menu_select);
             imageView.setVisibility(View.VISIBLE);
             if (CheckIcon!=0)
                imageView.setImageResource(CheckIcon);

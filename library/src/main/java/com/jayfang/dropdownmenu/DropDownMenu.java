@@ -58,7 +58,7 @@ public class DropDownMenu extends LinearLayout{
     private int mShowCount;
 
     //选中行数
-    private int mRowSelected=0;
+    private int mRowSelected=-1;
     //选中列数
     private int mColumnSelected=0;
 
@@ -257,15 +257,25 @@ public class DropDownMenu extends LinearLayout{
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     mPopupWindow.dismiss();
-                    mRowSelected = position;
 
-                    mTvMenuTitles.get(mColumnSelected).setText(mMenuItems.get(mColumnSelected)[mRowSelected]);
-                    mIvMenuArrow.get(mColumnSelected).setImageResource(mDownArrow);
-                    mMenuAdapters.get(mColumnSelected).setSelectIndex(mRowSelected);
-                    if (mMenuSelectedListener == null && isDebug)
-                        Toast.makeText(mContext, "MenuSelectedListener is  null", Toast.LENGTH_LONG).show();
-                    else
-                        mMenuSelectedListener.onSelected(view, mRowSelected, mColumnSelected);
+                    if (mRowSelected != position) {
+                        mRowSelected = position;
+
+                        mTvMenuTitles.get(mColumnSelected).setText(mMenuItems.get(mColumnSelected)[mRowSelected]);
+                        mIvMenuArrow.get(mColumnSelected).setImageResource(mDownArrow);
+                        mMenuAdapters.get(mColumnSelected).setSelectIndex(mRowSelected);
+                        if (mMenuSelectedListener == null && isDebug)
+                            Toast.makeText(mContext, "MenuSelectedListener is  null", Toast.LENGTH_LONG).show();
+                        else
+                            mMenuSelectedListener.onSelected(view, mRowSelected, mColumnSelected);
+                    }else { //if user reselects the same row
+                        mTvMenuTitles.get(mColumnSelected).setText(mDefaultMenuTitle[mColumnSelected]);
+                        mIvMenuArrow.get(mColumnSelected).setImageResource(mDownArrow);
+                        mMenuAdapters.get(mColumnSelected).setSelectIndex(-1);
+                        if (mMenuSelectedListener != null)
+                            mMenuSelectedListener.onReSelectingTheSameRow();
+                        mRowSelected = -1; //reset index
+                    }
                 }
             });
 
