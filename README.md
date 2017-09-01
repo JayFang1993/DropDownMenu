@@ -82,10 +82,10 @@ Update
         
 Contact
 ----------
-* Blog:[http://fangjie.info/](http://fangjie.info/)
+* Blog:[https://fangjie.me/](http://fangjie.me/)
 * Email:JayFang1993@gmail.com
 * Twitter:@[jayfang1993](https://twitter.com/jayfang1993)
-* Weibo:@[方杰_Jay](http://weibo.com/ncuitstudent)
+* Weibo:@[方杰](http://weibo.com/ncuitstudent)
 
 Remark
 ---------
